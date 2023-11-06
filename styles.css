@@ -1,1 +1,28 @@
-/*  your css code here. If applicable */
+form {
+			display: inline-block;
+			margin-top: 20px;
+		}
+
+		label {
+			display: inline-block;
+			width: 100px;
+		}
+
+		input[type="text"],
+		input[type="password"] {
+			margin-bottom: 10px;
+		}
+
+		input[type="button"] {
+			margin-top: 10px;
+		}
+
+		#logout-container {
+			margin-top: 20px;
+			display: none;
+		}
+
+		#logout {
+			display: inline-block;
+			margin-left: 20px;
+		}

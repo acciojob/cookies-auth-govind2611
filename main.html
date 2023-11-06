@@ -6,5 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+ <body onload="checkLoginStatus();">
+	<h1>User Authentication</h1>
+	<form id="login-form">
+		<label>Username:</label>
+		<input type="text" id="username"><br>
+		<label>Password:</label>
+		<input type="password" id="password"><br>
+		<input type="button" value="Log In" onclick="login()">
+	</form>
+	<div id="logout-container"></div>
+	  
+  </body>
 </html>
