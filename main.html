@@ -1,12 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
- <body onload="checkLoginStatus();">
+<html>
+
+<head>
+	<title>User Authentication</title>
+	<style>
+		form {
+			display: inline-block;
+			margin-top: 20px;
+		}
+
+		label {
+			display: inline-block;
+			width: 100px;
+		}
+
+		input[type="text"],
+		input[type="password"] {
+			margin-bottom: 10px;
+		}
+
+		input[type="button"] {
+			margin-top: 10px;
+		}
+
+		#logout-container {
+			margin-top: 20px;
+			display: none;
+		}
+
+		#logout {
+			display: inline-block;
+			margin-left: 20px;
+		}
+	</style>
+</head>
+
+<body onload="checkLoginStatus();">
 	<h1>User Authentication</h1>
 	<form id="login-form">
 		<label>Username:</label>
@@ -16,6 +45,49 @@
 		<input type="button" value="Log In" onclick="login()">
 	</form>
 	<div id="logout-container"></div>
-	  
-  </body>
+	<script>
+		// Log in user and set cookie
+		function login() {
+			let username = document.getElementById("username").value;
+			let password = document.getElementById("password").value;
+			if (username === "user" && password === "password") {
+				document.cookie = "loggedIn=true; max-age=3600";
+				showLogout();
+			} else {
+				alert("Invalid username or password");
+			}
+		}
+
+		// Show logout button if user is logged in
+		function showLogout() {
+			let logoutContainer = document.getElementById("logout-container");
+			let logoutButton = document.createElement("button");
+			logoutButton.id = "logout";
+			logoutButton.innerHTML = "Log Out";
+			logoutButton.onclick = logout;
+			logoutContainer.appendChild(logoutButton);
+			logoutContainer.style.display = "block";
+		}
+
+		// Log out user and remove cookie
+		function logout() {
+			document.cookie = "loggedIn=; max-age=0";
+			location.reload();
+		}
+
+		// Check login status and show logout if logged in
+		function checkLoginStatus() {
+			let cookies = document.cookie.split("; ");
+			for (let i = 0; i < cookies.length; i++) {
+				let cookie = cookies[i].split("=");
+				if (cookie[0] === "loggedIn" && cookie[1] === "true") {
+					showLogout();
+					break;
+				}
+			}
+		}
+
+	</script>
+</body>
+
 </html>
